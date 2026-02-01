@@ -39,7 +39,15 @@ logger = logging.getLogger()
 
 
 def go(args):
-
+    """
+    Purpose: main training flow:
+    - load data artifact from W&B
+    - split train/val
+    - build pipeline (preprocess + RF)
+    - train + evaluate
+    - export model with MLflow
+    - log model + metrics to W&B
+    """
     run = wandb.init(job_type="train_random_forest")
     run.config.update(args)
 
@@ -75,6 +83,9 @@ def go(args):
     # Fit the pipeline sk_pipe by calling the .fit method on X_train and y_train
     # YOUR CODE HERE
     ######################################
+    sk_pipe.fit(X_train, y_train)
+    ######################################
+
 
     # Compute r2 and MAE
     logger.info("Scoring")
@@ -97,7 +108,9 @@ def go(args):
     # HINT: use mlflow.sklearn.save_model
     mlflow.sklearn.save_model(
         # YOUR CODE HERE
-        input_example = X_train.iloc[:5]
+        sk_pipe,
+        path="random_forest_dir",
+        input_example=X_train.iloc[:5],
     )
     ######################################
 
@@ -121,6 +134,8 @@ def go(args):
     # Now save the variable mae under the key "mae".
     # YOUR CODE HERE
     ######################################
+    run.summary["mae"] = mae
+    ######################################
 
     # Upload to W&B the feture importance visualization
     run.log(
@@ -131,6 +146,10 @@ def go(args):
 
 
 def plot_feature_importance(pipe, feat_names):
+    """
+    Purpose: visualize RandomForest feature importances.
+    Note: TF-IDF creates many columns, so we sum all TF-IDF importances into one "name" bar.
+    """
     # We collect the feature importance for all non-nlp features first
     feat_imp = pipe["random_forest"].feature_importances_[: len(feat_names)-1]
     # For the NLP feature we sum across all the TF-IDF dimensions into a global
@@ -163,6 +182,8 @@ def get_inference_pipeline(rf_config, max_tfidf_features):
     # 2 - A OneHotEncoder() step to encode the variable
     non_ordinal_categorical_preproc = make_pipeline(
         # YOUR CODE HERE
+        SimpleImputer(strategy="most_frequent"),
+        OneHotEncoder(handle_unknown="ignore"),
     )
     ######################################
 
@@ -226,6 +247,8 @@ def get_inference_pipeline(rf_config, max_tfidf_features):
     sk_pipe = Pipeline(
         steps =[
         # YOUR CODE HERE
+         ("preprocessor", preprocessor),
+         ("random_forest", random_forest),
         ]
     )
 

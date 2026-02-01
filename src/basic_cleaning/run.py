@@ -55,47 +55,12 @@ if __name__ == "__main__":
 
     parser = argparse.ArgumentParser(description="A very basic data cleaning")
   
-    parser.add_argument(
-        "--input_artifact", 
-        type = ## INSERT TYPE HERE: str, float or int,
-        help = ## INSERT DESCRIPTION HERE,
-        required = True
-    )
-
-    parser.add_argument(
-        "--output_artifact", 
-        type = ## INSERT TYPE HERE: str, float or int,
-        help = ## INSERT DESCRIPTION HERE,
-        required = True
-    )
-
-    parser.add_argument(
-        "--output_type", 
-        type = ## INSERT TYPE HERE: str, float or int,
-        help = ## INSERT DESCRIPTION HERE,
-        required = True
-    )
-
-    parser.add_argument(
-        "--output_description", 
-        type = ## INSERT TYPE HERE: str, float or int,
-        help = ## INSERT DESCRIPTION HERE,
-        required = True
-    )
-
-    parser.add_argument(
-        "--min_price", 
-        type = ## INSERT TYPE HERE: str, float or int,
-        help = ## INSERT DESCRIPTION HERE,
-        required = True
-    )
-
-    parser.add_argument(
-        "--max_price",
-        type = ## INSERT TYPE HERE: str, float or int,
-        help = ## INSERT DESCRIPTION HERE,
-        required = True
-    )
+    parser.add_argument("--input_artifact", type=str, help="Input artifact to clean", required=True)
+    parser.add_argument("--output_artifact", type=str, help="Output artifact name", required=True)
+    parser.add_argument("--output_type", type=str, help="Output artifact type", required=True)
+    parser.add_argument("--output_description", type=str, help="Output artifact description", required=True)
+    parser.add_argument("--min_price", type=float, help="Minimum allowed price", required=True)
+    parser.add_argument("--max_price", type=float, help="Maximum allowed price", required=True)
 
 
     args = parser.parse_args()
