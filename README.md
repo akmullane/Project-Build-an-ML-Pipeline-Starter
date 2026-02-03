@@ -193,8 +193,9 @@ Please, make sure all steps are using **the same** python version and that you h
 All experiments, runs, and artifacts are tracked in Weights & Biases (W&B).
 
 **W&B Project:**  
-https://wandb.ai/gain921-western-governors-university/nyc_airbnb
-I don't see where I can change to public, feel free to request to join the team. 
+https://wandb.ai/gain921-western-governors-university/nyc_airbnb/reports/NYC_AIRBNB-Report--VmlldzoxNTgzMDA3Nw?accessToken=3bzcgw64cel54mgscaxytj3lovxmkmdkrj1oaclbd4253q9n8lflihkrlvqhkjbv
+
+
 
 ## GitHub Repository Link
 
