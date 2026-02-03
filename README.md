@@ -179,3 +179,25 @@ Please, make sure all steps are using **the same** python version and that you h
 ## License
 
 [License](LICENSE.txt)
+
+
+
+
+
+
+
+
+
+## Weights & Biases Dashboard Link
+
+All experiments, runs, and artifacts are tracked in Weights & Biases (W&B).
+
+**W&B Project:**  
+https://wandb.ai/gain921-western-governors-university/nyc_airbnb
+
+
+## GitHub Repository Link
+
+Project source code is available here:
+
+https://github.com/akmullane/Project-Build-an-ML-Pipeline-Starter
