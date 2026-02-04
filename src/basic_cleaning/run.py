@@ -35,7 +35,14 @@ def go(args):
     # in the project.
     # Add longitude and latitude filter to allow test_proper_boundaries to pass
     # ENTER CODE HERE
+    if "longitude" in df.columns and "latitude" in df.columns:
+        lon_min, lon_max = -74.25, -73.50
+        lat_min, lat_max = 40.50, 41.20
 
+        idx_geo = df["longitude"].between(lon_min, lon_max) & df["latitude"].between(lat_min, lat_max)
+        df = df[idx_geo].copy()
+    else:
+        logger.warning("longitude/latitude columns not found, skipping boundary filter")
     # Save the cleaned data
     df.to_csv('clean_sample.csv',index=False)
 
